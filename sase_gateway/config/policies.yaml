@@ -1,0 +1,41 @@
+users:
+  alice:
+    allowed_categories:
+      - Business
+      - Productivity
+      - Cloud Storage
+    blocked_categories:
+      - Adult
+      - Gambling
+      - Malware
+      - Social Media
+    allowed_destinations:
+      - example.com
+      - docs.internal
+    device_trust_required: true
+    allow_all_if_no_match: false
+  bob:
+    allowed_categories:
+      - Business
+      - Productivity
+      - Social Media
+    blocked_categories:
+      - Adult
+      - Malware
+    allowed_destinations:
+      - example.com
+      - news.example
+    device_trust_required: false
+    allow_all_if_no_match: true
+default_policy:
+  blocked_categories:
+    - Malware
+    - Adult
+    - Gambling
+  blocked_domains:
+    - bad.example
+    - malware.test
+  allow_all_if_no_match: false
+tokens:
+  alice: token-alice
+  bob: token-bob

@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.env
+.venv/
+.envrc
+.DS_Store
+.idea/
+.vscode/
+*.log
+.mypy_cache/
+.ruff_cache/
+coverage/
+htmlcov/
+.pytest_cache/
+streamlit_logs/
