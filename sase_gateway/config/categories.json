@@ -1,0 +1,10 @@
+{
+  "Business": ["accounting", "payroll", "erp", "crm"],
+  "Social Media": ["facebook", "twitter", "instagram", "tiktok", "linkedin"],
+  "Adult": ["adult", "nsfw"],
+  "Gambling": ["casino", "bet", "poker"],
+  "Malware": ["malware", "phish", "exploit"],
+  "AI Tools": ["openai", "stability", "anthropic", "ai"],
+  "Cloud Storage": ["dropbox", "drive", "onedrive", "box"],
+  "Productivity": ["docs", "sheets", "calendar", "jira"]
+}
