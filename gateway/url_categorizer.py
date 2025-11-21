@@ -1,12 +1,12 @@
-from __future__ import annotations
-
 """Keyword and regex based URL categorization."""
+
+from __future__ import annotations
 
 import json
 import logging
 import re
 from pathlib import Path
-from typing import Iterable, Set
+from typing import Iterable
 
 logger = logging.getLogger(__name__)
 
@@ -21,9 +21,9 @@ class URLCategorizer:
         with path.open("r", encoding="utf-8") as handle:
             self.categories: dict[str, Iterable[str]] = json.load(handle)
 
-    def categorize(self, url: str) -> Set[str]:
+    def categorize(self, url: str) -> set[str]:
         url_lower = url.lower()
-        matches: Set[str] = set()
+        matches: set[str] = set()
         for category, patterns in self.categories.items():
             for pattern in patterns:
                 try:
@@ -37,7 +37,7 @@ class URLCategorizer:
                     continue
         return matches or {"Uncategorized"}
 
-    def category_for_domain(self, domain: str) -> Set[str]:
+    def category_for_domain(self, domain: str) -> set[str]:
         return self.categorize(domain)
 
 

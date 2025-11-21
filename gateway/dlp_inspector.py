@@ -1,10 +1,9 @@
-from __future__ import annotations
-
 """Lightweight DLP-style payload inspection utilities."""
+
+from __future__ import annotations
 
 import re
 from dataclasses import dataclass
-from typing import List
 
 SENSITIVE_KEYWORDS: list[str] = ["salary", "passport", "patient", "internal", "confidential"]
 AU_PHONE_PATTERN = re.compile(r"\b0\d{1,2}\s?\d{3}\s?\d{3}\b")
@@ -16,7 +15,7 @@ TFN_PATTERN = re.compile(r"\b\d{3}\s?\d{3}\s?\d{3}\b")
 class DLPInspectionResult:
     """Outcome from scanning a payload for sensitive content."""
 
-    findings: List[str]
+    findings: list[str]
     action: str
     blocked: bool
 
@@ -42,7 +41,7 @@ def inspect_payload(payload: str | bytes) -> DLPInspectionResult:
     else:
         payload_text = payload or ""
 
-    findings: List[str] = []
+    findings: list[str] = []
     lowered = payload_text.lower()
 
     if any(keyword in lowered for keyword in SENSITIVE_KEYWORDS):

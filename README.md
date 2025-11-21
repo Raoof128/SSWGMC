@@ -34,17 +34,16 @@ graph LR
 ## Project Layout
 
 ```
-sase_gateway/
-  gateway/               # Enforcement engines
-  auth/                  # Zero Trust identity & device checks
-  api/                   # FastAPI control plane
-  dashboard/             # Streamlit visualisation
-  casb/                  # Cloud app and activity detection
-  siem/                  # Log normalisation and forwarding
-  config/                # Policies, blocklists, categories
-  tests/                 # Pytest suite
-  docker-compose.yml
-  requirements.txt
+gateway/               # Enforcement engines
+auth/                  # Zero Trust identity & device checks
+api/                   # FastAPI control plane
+dashboard/             # Streamlit visualisation
+casb/                  # Cloud app and activity detection
+siem/                  # Log normalisation and forwarding
+config/                # Policies, blocklists, categories
+tests/                 # Pytest suite
+docker-compose.yml
+requirements.txt
 ```
 
 ## Features

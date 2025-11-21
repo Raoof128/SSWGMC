@@ -1,12 +1,12 @@
-from __future__ import annotations
-
 """Secure Web Gateway pipeline that orchestrates all enforcement engines."""
+
+from __future__ import annotations
 
 import json
 import logging
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, List, Mapping, Set
+from typing import Any, Mapping
 from urllib.parse import urlparse
 
 from auth.device_trust import DeviceTrust
@@ -24,7 +24,7 @@ from siem.log_forwarder import LogForwarder
 configure_logging()
 logger = logging.getLogger(__name__)
 
-SUPPORTED_METHODS: Set[str] = {"GET", "POST", "PUT", "DELETE", "PATCH"}
+SUPPORTED_METHODS: set[str] = {"GET", "POST", "PUT", "DELETE", "PATCH"}
 
 
 @dataclass(frozen=True)
@@ -34,11 +34,11 @@ class ProxyRequest:
     url: str
     method: str = "GET"
     token: str | None = None
-    device: Dict[str, Any] = field(default_factory=dict)
+    device: dict[str, Any] = field(default_factory=dict)
     body: str | bytes | None = ""
 
     @classmethod
-    def from_mapping(cls, request: Mapping[str, Any]) -> "ProxyRequest":
+    def from_mapping(cls, request: Mapping[str, Any]) -> ProxyRequest:
         """Instantiate from a plain mapping, providing safe defaults."""
 
         return cls(
@@ -58,8 +58,8 @@ class ProxyResult:
     decision: PolicyDecision
     casb_action: str
     dlp_action: str
-    tls_metadata: Dict[str, Any]
-    log_record: Dict[str, Any] = field(default_factory=dict)
+    tls_metadata: dict[str, Any]
+    log_record: dict[str, Any] = field(default_factory=dict)
 
 
 class SecureWebGateway:
@@ -98,7 +98,7 @@ class SecureWebGateway:
 
         proxy_request = ProxyRequest.from_mapping(request)
         parsed = urlparse(proxy_request.url)
-        reasons: List[str] = []
+        reasons: list[str] = []
 
         if not proxy_request.url or not parsed.scheme:
             reasons.append("invalid url: missing scheme")
@@ -123,7 +123,7 @@ class SecureWebGateway:
         tls_metadata = self.tls_inspector.inspect(server_name=domain).__dict__
 
         dlp_result: DLPInspectionResult = (
-            inspect_payload(proxy_request.body)
+            inspect_payload(proxy_request.body or "")
             if proxy_request.method.upper() == "POST"
             else DLPInspectionResult([], "allow", False)
         )
@@ -139,7 +139,9 @@ class SecureWebGateway:
         )
 
         if dns_decision.get("blocked"):
-            reasons.append(dns_decision.get("reason", "blocked by DNS"))
+            reason = dns_decision.get("reason", "blocked by DNS")
+            if isinstance(reason, str):
+                reasons.append(reason)
         reasons.extend(decision.reasons)
         if casb_violations:
             reasons.append("CASB violation: " + "; ".join(casb_violations))

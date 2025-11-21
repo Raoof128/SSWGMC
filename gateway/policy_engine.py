@@ -1,11 +1,11 @@
-from __future__ import annotations
-
 """Policy evaluation engine for the Secure Web Gateway."""
+
+from __future__ import annotations
 
 import logging
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, Set
+from typing import Iterable
 
 import yaml
 
@@ -21,7 +21,7 @@ class PolicyDecision:
 
     allowed: bool
     reasons: list[str]
-    categories: Set[str]
+    categories: set[str]
     user: str | None
     device: DevicePosture
 

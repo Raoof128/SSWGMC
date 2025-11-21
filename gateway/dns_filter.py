@@ -1,10 +1,10 @@
-from __future__ import annotations
-
 """DNS filter that checks domains against configurable blocklists."""
+
+from __future__ import annotations
 
 import logging
 from pathlib import Path
-from typing import Iterable, Set
+from typing import Iterable
 
 logger = logging.getLogger(__name__)
 
@@ -13,7 +13,7 @@ class DNSFilter:
     """Simple in-memory DNS filter used by the proxy pipeline."""
 
     def __init__(self, blocklist_paths: Iterable[str | Path]):
-        self.blocked_domains: Set[str] = set()
+        self.blocked_domains: set[str] = set()
         for path in blocklist_paths:
             self._load_blocklist(Path(path))
 
