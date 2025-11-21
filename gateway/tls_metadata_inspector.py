@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """TLS metadata inspection (non-MITM) helper."""
+
+from __future__ import annotations
 
 from dataclasses import dataclass
 

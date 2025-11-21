@@ -1,9 +1,8 @@
-from __future__ import annotations
-
 """Device posture evaluation utilities."""
 
+from __future__ import annotations
+
 from dataclasses import dataclass
-from typing import Dict
 
 
 @dataclass(frozen=True)
@@ -21,7 +20,7 @@ class DeviceTrust:
     def __init__(self, minimum_score: int = 70):
         self.minimum_score = minimum_score
 
-    def evaluate(self, device: Dict[str, str | int | bool]) -> DevicePosture:
+    def evaluate(self, device: dict[str, str | int | bool]) -> DevicePosture:
         healthy_flag = bool(device.get("healthy", True))
         score = int(device.get("posture_score", 80))
         device_id = str(device.get("device_id", "unknown"))

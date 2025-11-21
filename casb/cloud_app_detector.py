@@ -1,16 +1,15 @@
-from __future__ import annotations
-
 """Cloud application detection to support CASB-lite controls."""
 
+from __future__ import annotations
+
 from dataclasses import dataclass
-from typing import Optional
 
 
 @dataclass(frozen=True)
 class CloudAppDetection:
     """Represents the result of matching traffic against known cloud apps."""
 
-    app: Optional[str]
+    app: str | None
     action: str
     reason: str
 

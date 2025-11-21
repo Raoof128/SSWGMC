@@ -1,11 +1,11 @@
-from __future__ import annotations
-
 """Utilities to normalize logs for downstream SIEM ingestion."""
 
-from typing import Any, Dict
+from __future__ import annotations
+
+from typing import Any
 
 
-def normalize(log_record: Dict[str, Any]) -> Dict[str, Any]:
+def normalize(log_record: dict[str, Any]) -> dict[str, Any]:
     """Convert an enforcement log into a consistent, SIEM-friendly schema."""
 
     base = {

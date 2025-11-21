@@ -1,10 +1,9 @@
-from __future__ import annotations
-
 """Zero Trust token validation helpers."""
+
+from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict
 
 import yaml
 
@@ -24,14 +23,14 @@ class ZTNATokenValidator:
     """Mock token validator that maps pre-shared tokens to users."""
 
     def __init__(
-        self, known_tokens: Dict[str, str] | None = None, token_store_path: Path | None = None
+        self, known_tokens: dict[str, str] | None = None, token_store_path: Path | None = None
     ):
         self.token_store_path = (
             token_store_path or Path(__file__).resolve().parents[1] / "config" / "policies.yaml"
         )
         self.known_tokens = known_tokens or self._load_tokens_from_policy()
 
-    def _load_tokens_from_policy(self) -> Dict[str, str]:
+    def _load_tokens_from_policy(self) -> dict[str, str]:
         if self.token_store_path.exists():
             with self.token_store_path.open("r", encoding="utf-8") as handle:
                 data = yaml.safe_load(handle) or {}

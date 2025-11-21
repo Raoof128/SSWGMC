@@ -11,6 +11,8 @@ combine_as_imports = true
 [tool.ruff]
 line-length = 100
 extend-exclude = ["streamlit_logs"]
+
+[tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP"]
 
 [tool.mypy]

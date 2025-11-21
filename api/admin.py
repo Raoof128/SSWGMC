@@ -1,16 +1,16 @@
-from __future__ import annotations
-
 """Administrative helpers for policies and configuration."""
 
+from __future__ import annotations
+
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any
 
 import yaml
 
 CONFIG_PATH = Path(__file__).resolve().parents[1] / "config" / "policies.yaml"
 
 
-def load_policies(path: Path | None = None) -> Dict[str, Any]:
+def load_policies(path: Path | None = None) -> dict[str, Any]:
     """Load policies from disk, returning an empty structure if missing."""
 
     policy_path = path or CONFIG_PATH
@@ -20,7 +20,7 @@ def load_policies(path: Path | None = None) -> Dict[str, Any]:
         return yaml.safe_load(handle) or {"default_policy": {}, "users": {}}
 
 
-def save_policies(payload: Dict[str, Any], path: Path | None = None) -> None:
+def save_policies(payload: dict[str, Any], path: Path | None = None) -> None:
     """Persist policies to disk."""
 
     policy_path = path or CONFIG_PATH
