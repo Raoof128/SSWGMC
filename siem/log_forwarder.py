@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import logging
 from pathlib import Path
+from typing import Any
 
 from siem.normalizer import normalize
 
@@ -18,7 +19,7 @@ class LogForwarder:
         self.destination = destination or Path("streamlit_logs/gateway.log")
         self.destination.parent.mkdir(parents=True, exist_ok=True)
 
-    def forward(self, record: dict[str, object]) -> None:
+    def forward(self, record: dict[str, Any]) -> None:
         """Persist normalized records to disk; errors are logged but not raised."""
 
         normalized = normalize(record)

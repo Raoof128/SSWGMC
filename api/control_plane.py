@@ -98,7 +98,7 @@ def token_verify(payload: TokenVerify) -> dict[str, str]:
 
     validator = ZTNATokenValidator()
     result = validator.validate(payload.token)
-    if not result.valid:
+    if not result.valid or result.user is None:
         raise HTTPException(status_code=401, detail=result.reason)
     return {"user": result.user, "status": "valid"}
 

@@ -123,7 +123,7 @@ class SecureWebGateway:
         tls_metadata = self.tls_inspector.inspect(server_name=domain).__dict__
 
         dlp_result: DLPInspectionResult = (
-            inspect_payload(proxy_request.body)
+            inspect_payload(proxy_request.body or "")
             if proxy_request.method.upper() == "POST"
             else DLPInspectionResult([], "allow", False)
         )
@@ -139,7 +139,9 @@ class SecureWebGateway:
         )
 
         if dns_decision.get("blocked"):
-            reasons.append(dns_decision.get("reason", "blocked by DNS"))
+            reason = dns_decision.get("reason", "blocked by DNS")
+            if isinstance(reason, str):
+                reasons.append(reason)
         reasons.extend(decision.reasons)
         if casb_violations:
             reasons.append("CASB violation: " + "; ".join(casb_violations))
